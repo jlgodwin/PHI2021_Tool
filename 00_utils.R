@@ -356,7 +356,7 @@ download_kc_public_clinics <- function() {
     # Public Health Clinics data source from King County GIS Open Data API
     # https://gis-kingcounty.opendata.arcgis.com/datasets/public-health-clinics-ph-clinics-point?geometry=-124.257%2C47.186%2C-120.241%2C47.835
     kc_public_clinics <- readLines("https://gisdata.kingcounty.gov/arcgis/rest/services/OpenDataPortal/pubsafe___base/MapServer/178/query?where=1%3D1&outFields=NAME,ADDRESS,ZIPCODE&outSR=4326&f=json")
-    write(kc_public_clinics, file = "./Datakc_public_clinics.json")
+    write(kc_public_clinics, file = "./Data/kc_public_clinics.json")
 }
 
 download_kc_schools <- function() {
@@ -376,7 +376,7 @@ download_kc_schools <- function() {
                 CODE==666 ~ "School - K thru 12"
             )
         )
-    writeOGR(kc_schools, dsn = "./Datakc_schools.json", layer = "kc_schools", driver="GeoJSON", verbose = FALSE)
+    writeOGR(kc_schools, dsn = "./Data/kc_schools.json", layer = "kc_schools", driver="GeoJSON", verbose = FALSE)
 }
 
 # Source of the function

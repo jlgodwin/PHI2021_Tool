@@ -112,11 +112,10 @@ ui <- dashboardPage(
         tags$style(type='text/css', "p {font-size: 16px !important} li {font-size: 16px !important}"),
         
         h1(
-          HTML("Exploring King County"),
+          HTML("<b>Exploring King County</b>"),
           br(),
           align = "left"
         ),
-        br(),
         h2(
           HTML("Our Population & Households"),
           align = "left"
@@ -133,7 +132,12 @@ ui <- dashboardPage(
         HTML("Growth and Vulnerabilities")),
         br(),
         
-        p(HTML("For an overview of our project, download this <a target='_blank' href='./docs/PHI2021_Pop_and_Housing.pdf'>slide deck</a>. For more information about our methodology, please read our  <a target='_blank' href='http://population-dynamics-lab.csde.washington.edu:8080/kc_forecast_2045/docs/uw_forecast_2045_technical_report.pdf'>technical report</a>. Visit our <a class='clickable_text' onclick='openTab(\"guide_tab\");' style='cursor:pointer;'>User Guide</a> for directions on using our <a class='clickable_text' onclick='openTab(\"viz_tab\");' style='cursor:pointer;'>interactive map</a>.")),
+        p(HTML("For an overview of our project, download this <a target='_blank' href='./SupportingMaterial/docs/PHI2021_Pop_and_Housing.pdf'>slide deck</a>.",
+        "For more information about our work, please read our technical report. You can find the legacy tool",
+       "and documentation for the population projections to 2045 developed by the 2020 PHI Applied Research Fellows at " ,
+       "<a target='_blank' href='https://rsc.csde.washington.edu/kc_forecast_2045/'></a>."#,
+        #"Visit our <a class='clickable_text' onclick='openTab(\"guide_tab\");' style='cursor:pointer;'>User Guide</a> for directions on using our <a class='clickable_text' onclick='openTab(\"viz_tab\");' style='cursor:pointer;'>interactive map</a>."
+                                                               )),
         br(),
   
         p(HTML("Please contact <a target='_blank' href='mailto:csde@uw.edu'>csde@uw.edu</a> if you have any questions."))

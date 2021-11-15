@@ -15,10 +15,10 @@ library(shinyBS)
 source("./00_utils.R")
 # Updated as of 9.9
 ui <- dashboardPage(
-  title = "Exploring King County: Our Population & Households",
+  title = "Exploring King County",
   
   header = dashboardHeader(
-    title = "Exploring King County: Our Population & Households",
+    title = "Exploring King County",
     titleWidth = 330
   ),
   

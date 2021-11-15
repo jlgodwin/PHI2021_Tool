@@ -132,10 +132,10 @@ ui <- dashboardPage(
         HTML("Growth and Vulnerabilities")),
         br(),
         
-        p(HTML("For an overview of our project, download this <a target='_blank' href='./SupportingMaterial/docs/PHI2021_Pop_and_Housing.pdf'>slide deck</a>.",
+        p(HTML("For an overview of our project, download this <a target='_blank' href='./PHI2021_Pop_and_Housing.pdf'>slide deck</a>.",
         "For more information about our work, please read our technical report. You can find the legacy tool",
        "and documentation for the population projections to 2045 developed by the 2020 PHI Applied Research Fellows at " ,
-       "<a target='_blank' href='https://rsc.csde.washington.edu/kc_forecast_2045/'></a>."#,
+       "https://rsc.csde.washington.edu/kc_forecast_2045/."#,
         #"Visit our <a class='clickable_text' onclick='openTab(\"guide_tab\");' style='cursor:pointer;'>User Guide</a> for directions on using our <a class='clickable_text' onclick='openTab(\"viz_tab\");' style='cursor:pointer;'>interactive map</a>."
                                                                )),
         br(),
@@ -433,11 +433,11 @@ ui <- dashboardPage(
         p(HTML("<a target='_blank' href='./docs/uw_forecast_2045_user_guide.pdf'>Click here to view the user guide in PDF</a>")),
         
         
-        h3("Walkthrough Video"),
-        tags$video(id = "video", src = 'phi_viz_guide.mp4',  type = 'video/mp4', controls = 'controls', onloadstart="this.volume=0.3", width="100%"),
-        br(),
-        br(),
-        br(),
+        # h3("Walkthrough Video"),
+        # tags$video(id = "video", src = 'phi_viz_guide.mp4',  type = 'video/mp4', controls = 'controls', onloadstart="this.volume=0.3", width="100%"),
+        # br(),
+        # br(),
+        # br(),
 
         h3("Limitations"),
         p(HTML("Although population projections aim to provide important estimates for planners, service providers, researchers, and the general public, they are only a reflection of what the population <i>could</i> look like if current population trends continue. They are not determinative of the future. Further, small area projections can be more uncertain and so less predictive than projections for larger areas and populations, and less accurate for the distant future. Like all forecasts, our projections reflect a number of assumptions about expected populations dynamics in King County over the forecast period.")),
@@ -468,6 +468,11 @@ ui <- dashboardPage(
         p(
           "This research was supported by the following individuals:",
           tags$ul(
+            tags$li("Ali Ahmed"),
+            tags$li("Adrien Allorant"),
+            tags$li("Will von Geldern"),
+            tags$li("Juliette Randazza"),
+            tags$li("Grace Rossi"),
             tags$li("Xiaoqi (Steven) Bao"),
             tags$li("Eileen Kazura"),
             tags$li("Jessica Lapham"),
@@ -477,7 +482,9 @@ ui <- dashboardPage(
             tags$li("Rebeccah Maskin"),
             tags$li("Neal Marquez"),
             tags$li("Christine Leibbrand"),
+            tags$li("Jessica Godwin"),
             tags$li("Sara Curran"),
+            tags$li("Arti Shah"),
             tags$li("Meher Antia"),
             tags$li("Derek Fulwiler"),
             tags$li("Takashi Inoue")

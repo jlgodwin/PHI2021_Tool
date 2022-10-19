@@ -55,11 +55,24 @@ while (!exists("kc_tl_2040")) {
 ### Population Projection csv ####
 #### Tract level ####
 message("Read tract-level population projections .csv.\n")
-tract_proj <- read.csv(
-    file = "./data/tract_age5_race_sex_proj_2000_2045.csv",
+tract_proj_2015 <- read.csv(
+    file = "./data/tract_age5_race_sex_proj_2000_2015.csv",
     colClasses = c("GEOID" = "character")
 )
 
+tract_proj_2030 <- read.csv(
+  file = "./data/tract_age5_race_sex_proj_2020_2030.csv",
+  colClasses = c("GEOID" = "character")
+)
+
+tract_proj_2045 <- read.csv(
+  file = "./data/tract_age5_race_sex_proj_2035_2045.csv",
+  colClasses = c("GEOID" = "character")
+)
+
+tract_proj <- rbind.data.frame(tract_proj_2015,
+                               tract_proj_2030,
+                               tract_proj_2045)
 tract_proj <- tract_proj %>% 
     rename("Age" = "Age5") %>% 
     as.data.frame()
@@ -69,6 +82,7 @@ while (!exists("tract_proj")) {
 
 #### HRA-level ####
 message("Read HRA-level population projections .csv.\n")
+
 hra_proj <- read.csv(
     file = "./data/hra_age5_race_sex_proj_2000_2045.csv"
 )

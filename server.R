@@ -12,24 +12,24 @@ library(tidyr)
 ## Download ####
 
 
-# ### KC public clinics ,json ####
-# 
-# if (!file.exists("./data/kc_public_clinics.shp")) {
-#   download_kc_public_clinics()
-#   while (!file.exists("./data/kc_public_clinics.shp")) {
-#     Sys.sleep(1)
-#   }
-#   
-# }
-# #
-# ### KC school sites .json ####
-# if (!file.exists("./data/kc_schools.shp")) {
-#   download_kc_schools()
-#   while (!file.exists("./data/kc_schools.shp")) {
-#     Sys.sleep(1)
-#   }
-#   
-# }
+### KC public clinics ,json ####
+
+if (!file.exists("./data/kc_public_clinics.shp")) {
+  download_kc_public_clinics()
+  while (!file.exists("./data/kc_public_clinics.shp")) {
+    Sys.sleep(1)
+  }
+  
+}
+#
+### KC school sites .json ####
+if (!file.exists("./data/kc_schools.shp")) {
+  download_kc_schools()
+  while (!file.exists("./data/kc_schools.shp")) {
+    Sys.sleep(1)
+  }
+  
+}
 
 ## Load ####
 

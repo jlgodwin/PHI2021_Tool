@@ -4510,275 +4510,32 @@
     "data/burden_hra.csv": {
       "checksum": "7fe375d16e8408f1b69213caaf27a41f"
     },
-    "data/CreateDir": {
-      "checksum": "68b329da9893e34099c7d8ad5cb9c940"
-    },
-    "data/data/Bedrooms_1BR_tract.csv": {
-      "checksum": "3a78ec5836d7af9313924f2d7ba916ec"
-    },
-    "data/data/Bedrooms_2BR_tract.csv": {
-      "checksum": "eeba4283f56bf61273ba4557fa438c68"
-    },
-    "data/data/Bedrooms_tract.csv": {
-      "checksum": "1470b0c036816cda45efe5cffbf222cd"
-    },
-    "data/data/burden_hra.csv": {
-      "checksum": "7fe375d16e8408f1b69213caaf27a41f"
-    },
-    "data/data/census_tracts_2020/2020_Census_Tracts_for_King_County___tracts20_area.cpg": {
+    "data/census_tracts_2020/2020_Census_Tracts_for_King_County___tracts20_area.cpg": {
       "checksum": "ae3b3df9970b49b6523e608759bc957d"
     },
-    "data/data/census_tracts_2020/2020_Census_Tracts_for_King_County___tracts20_area.dbf": {
+    "data/census_tracts_2020/2020_Census_Tracts_for_King_County___tracts20_area.dbf": {
       "checksum": "8dcd9cfee6e657bca54ff6aa740140d8"
     },
-    "data/data/census_tracts_2020/2020_Census_Tracts_for_King_County___tracts20_area.prj": {
+    "data/census_tracts_2020/2020_Census_Tracts_for_King_County___tracts20_area.prj": {
       "checksum": "c742bee3d4edfc2948a2ad08de1790a5"
     },
-    "data/data/census_tracts_2020/2020_Census_Tracts_for_King_County___tracts20_area.shp": {
+    "data/census_tracts_2020/2020_Census_Tracts_for_King_County___tracts20_area.shp": {
       "checksum": "eddf8b23531736259ae9da1182da83f3"
     },
-    "data/data/census_tracts_2020/2020_Census_Tracts_for_King_County___tracts20_area.shx": {
+    "data/census_tracts_2020/2020_Census_Tracts_for_King_County___tracts20_area.shx": {
       "checksum": "d8202645ce5f4f138c108899662e3d94"
     },
-    "data/data/census_tracts_2020/2020_Census_Tracts_for_King_County___tracts20_area.xml": {
+    "data/census_tracts_2020/2020_Census_Tracts_for_King_County___tracts20_area.xml": {
       "checksum": "a1c358832226f33e23bf56da5f1b2a14"
     },
-    "data/data/craigslist_hra.csv": {
+    "data/craigslist_hra.csv": {
       "checksum": "aa85dc9a400aa2c814670ccb4368c247"
     },
-    "data/data/craigslist_tract.csv": {
+    "data/craigslist_tract.csv": {
       "checksum": "4e75d76e78e2430386cdf3802ff93e32"
     },
-    "data/data/CreateDir": {
+    "data/CreateDir": {
       "checksum": "68b329da9893e34099c7d8ad5cb9c940"
-    },
-    "data/data/edu_hra.csv": {
-      "checksum": "e2fafdffe33c4b7360256c9bd5822615"
-    },
-    "data/data/hh_by_hh_size_and_tenure_ct.csv": {
-      "checksum": "8f7d80810968d38bca06d116687cd202"
-    },
-    "data/data/hhsize_hra.csv": {
-      "checksum": "f3eeaa89ad26223b854e4f91099a482d"
-    },
-    "data/data/hra_2020_nowater.zip": {
-      "checksum": "347fa6350a1f032ef3319615ea86e88c"
-    },
-    "data/data/hra_2020_nowater/hra_2020_nowater.dbf": {
-      "checksum": "574fa6d77d86820aa906e6877a311f71"
-    },
-    "data/data/hra_2020_nowater/hra_2020_nowater.prj": {
-      "checksum": "9cb5e74e06d0d22c1fcf70adcdc46302"
-    },
-    "data/data/hra_2020_nowater/hra_2020_nowater.shp": {
-      "checksum": "54316a6d019add2fd7c356cc3fd8188f"
-    },
-    "data/data/hra_2020_nowater/hra_2020_nowater.shx": {
-      "checksum": "e1e31752a31b53319b3a1d2ad2b4702e"
-    },
-    "data/data/hra_2020/hra_2020_nowater.dbf": {
-      "checksum": "33348630930207cfab184ae06529a555"
-    },
-    "data/data/hra_2020/hra_2020_nowater.prj": {
-      "checksum": "9cb5e74e06d0d22c1fcf70adcdc46302"
-    },
-    "data/data/hra_2020/hra_2020_nowater.shp": {
-      "checksum": "54316a6d019add2fd7c356cc3fd8188f"
-    },
-    "data/data/hra_2020/hra_2020_nowater.shx": {
-      "checksum": "e1e31752a31b53319b3a1d2ad2b4702e"
-    },
-    "data/data/hra_2020/hra_2020.dbf": {
-      "checksum": "33348630930207cfab184ae06529a555"
-    },
-    "data/data/hra_2020/hra_2020.prj": {
-      "checksum": "9cb5e74e06d0d22c1fcf70adcdc46302"
-    },
-    "data/data/hra_2020/hra_2020.shp": {
-      "checksum": "2b4cb0ac69b509f00c87fe4a15124f32"
-    },
-    "data/data/hra_2020/hra_2020.shx": {
-      "checksum": "8db29a6a7c89c4eb8f6008375c5368b5"
-    },
-    "data/data/hra_age5_race_sex_proj_2000_2045.csv": {
-      "checksum": "92f71de741adf499f06cd06551c1cf74"
-    },
-    "data/data/hra_hhsize_by_tenure.csv": {
-      "checksum": "d9ae62f90a237613918d41c594f9ad5f"
-    },
-    "data/data/hra_race_projections.csv": {
-      "checksum": "c4dc2431587b6c3858a83c201fec1cc2"
-    },
-    "data/data/kc_chc.dbf": {
-      "checksum": "1ae5f750724842a50370ab285838ad03"
-    },
-    "data/data/kc_chc.json": {
-      "checksum": "95ab3855d67016db4218b47b28097fae"
-    },
-    "data/data/kc_chc.prj": {
-      "checksum": "c742bee3d4edfc2948a2ad08de1790a5"
-    },
-    "data/data/kc_chc.shp": {
-      "checksum": "3643af7081ac1a896f39f54ced168bf7"
-    },
-    "data/data/kc_chc.shx": {
-      "checksum": "9291bf143603f523f1f9cc264e8a2d00"
-    },
-    "data/data/kc_cr_station_2040.dbf": {
-      "checksum": "e2ce233c8d6b47b68bf0339c0e919000"
-    },
-    "data/data/kc_cr_station_2040.json": {
-      "checksum": "aa33f25e180e12536640e5c5d817db0e"
-    },
-    "data/data/kc_cr_station_2040.prj": {
-      "checksum": "c742bee3d4edfc2948a2ad08de1790a5"
-    },
-    "data/data/kc_cr_station_2040.shp": {
-      "checksum": "428ac81d53e2a7906d3afb4ef5daf8be"
-    },
-    "data/data/kc_cr_station_2040.shx": {
-      "checksum": "598b847ce22475ddc0bdfa43952fd8d8"
-    },
-    "data/data/kc_geography": {
-      "checksum": "3e15b081a5da9e06801bb4f59b00a777"
-    },
-    "data/data/kc_hra.dbf": {
-      "checksum": "6b432b48f679adae608e04ce5444265e"
-    },
-    "data/data/kc_hra.json": {
-      "checksum": "bb108172d1f8f496bfa7dd8019e6fbd2"
-    },
-    "data/data/kc_hra.prj": {
-      "checksum": "c742bee3d4edfc2948a2ad08de1790a5"
-    },
-    "data/data/kc_hra.shp": {
-      "checksum": "cc49ff544c50dd9aa99ea5f980a03dc2"
-    },
-    "data/data/kc_hra.shx": {
-      "checksum": "99d3db42e073a3be2b6a0ab13e607ca9"
-    },
-    "data/data/kc_lr_station_2040.dbf": {
-      "checksum": "ce76ebeb3aaf85ddd404a21126162ddd"
-    },
-    "data/data/kc_lr_station_2040.json": {
-      "checksum": "665d395641927d9468a86c886273c869"
-    },
-    "data/data/kc_lr_station_2040.prj": {
-      "checksum": "c742bee3d4edfc2948a2ad08de1790a5"
-    },
-    "data/data/kc_lr_station_2040.shp": {
-      "checksum": "35002d6ed403f1cdfc3eacfe726f25ee"
-    },
-    "data/data/kc_lr_station_2040.shx": {
-      "checksum": "9f46b59c7846896a601c5bb93cf57a0f"
-    },
-    "data/data/kc_public_clinics.dbf": {
-      "checksum": "05eaaa3fbcb5aa7aa820e1f47dd6c152"
-    },
-    "data/data/kc_public_clinics.json": {
-      "checksum": "c6a4f94e213af758c0bb341e38437443"
-    },
-    "data/data/kc_public_clinics.prj": {
-      "checksum": "c742bee3d4edfc2948a2ad08de1790a5"
-    },
-    "data/data/kc_public_clinics.shp": {
-      "checksum": "f99ff34826300ba52b16250bc67f5685"
-    },
-    "data/data/kc_public_clinics.shx": {
-      "checksum": "fb3bd1160220f09d0a68bedee0ad43ac"
-    },
-    "data/data/kc_schools.dbf": {
-      "checksum": "d6be07c725abc3e7e28e123c3c5b71be"
-    },
-    "data/data/kc_schools.json": {
-      "checksum": "02ad860979ecac930b06562d0845cd42"
-    },
-    "data/data/kc_schools.prj": {
-      "checksum": "c742bee3d4edfc2948a2ad08de1790a5"
-    },
-    "data/data/kc_schools.shp": {
-      "checksum": "69e535494409e7a7e7368bc9e3b06cc1"
-    },
-    "data/data/kc_schools.shx": {
-      "checksum": "a7a5c1f1428b8a2e29865c49f6f2abc5"
-    },
-    "data/data/kc_tl_2040.dbf": {
-      "checksum": "c6f6715c14a3b0526c4eb92f1584ed09"
-    },
-    "data/data/kc_tl_2040.json": {
-      "checksum": "34a2c1f4e2e8a807e9762330105995f1"
-    },
-    "data/data/kc_tl_2040.prj": {
-      "checksum": "c742bee3d4edfc2948a2ad08de1790a5"
-    },
-    "data/data/kc_tl_2040.shp": {
-      "checksum": "f8021ba386e345d8caca39bb2cb63bb0"
-    },
-    "data/data/kc_tl_2040.shx": {
-      "checksum": "166d2a5f5b55f9f2efda65661fbf543d"
-    },
-    "data/data/kc_tract.dbf": {
-      "checksum": "af0a77de76a090dbf5c7e9c0df0bc941"
-    },
-    "data/data/kc_tract.json": {
-      "checksum": "2aa00f69d5dbc94b6c3fff4080ab8c94"
-    },
-    "data/data/kc_tract.prj": {
-      "checksum": "c742bee3d4edfc2948a2ad08de1790a5"
-    },
-    "data/data/kc_tract.shp": {
-      "checksum": "f0505319526f8580c8ddbf0cd394def7"
-    },
-    "data/data/kc_tract.shx": {
-      "checksum": "e119bfefdb8cf1bc190cd5da36beeb33"
-    },
-    "data/data/kc_wic.dbf": {
-      "checksum": "7fd04c63c041c7c0a0a2462bf4a7d00c"
-    },
-    "data/data/kc_wic.json": {
-      "checksum": "54512818d38b92b9796588675e4cc1f7"
-    },
-    "data/data/kc_wic.prj": {
-      "checksum": "c742bee3d4edfc2948a2ad08de1790a5"
-    },
-    "data/data/kc_wic.shp": {
-      "checksum": "31b71fd86ae429854624e6ebecac1b21"
-    },
-    "data/data/kc_wic.shx": {
-      "checksum": "ebe2322f4e9507c0bd75d652e58643d0"
-    },
-    "data/data/med_inc_tract.csv": {
-      "checksum": "ff7195723da3862001e8cc64f1149ff4"
-    },
-    "data/data/med_rent_tract.csv": {
-      "checksum": "56d016805c7859d8da4a15af3d689edb"
-    },
-    "data/data/roomoccupant_tool.csv": {
-      "checksum": "f6ca21b29024a37890fb3ac22f119d1f"
-    },
-    "data/data/tract_age5_race_sex_proj_2000_2015.csv": {
-      "checksum": "41b17c0d9c0822f04fa91310abc3b8b0"
-    },
-    "data/data/tract_age5_race_sex_proj_2020_2030.csv": {
-      "checksum": "a9101414d90133e617286f1fa35f5b4f"
-    },
-    "data/data/tract_age5_race_sex_proj_2035_2045.csv": {
-      "checksum": "cd2a5ee591bc055582137dca6d306b28"
-    },
-    "data/data/tract_edu_attainmentv2.csv": {
-      "checksum": "d43f026fe93f9c67f5a431a3c0b687b8"
-    },
-    "data/data/tract_rent_burden_pop.csv": {
-      "checksum": "582fe59b2a04c8c2e5b4a62bacd2b906"
-    },
-    "data/data/tract_RO_population.csv": {
-      "checksum": "aab4b3f325d99f74b8c9ae6991acc37c"
-    },
-    "data/data/tract_roomoc.csv": {
-      "checksum": "7235df9db92e35c95ffa32807584f3f2"
-    },
-    "data/data/tract_transp_age.csv": {
-      "checksum": "05765c332e459e0c5ff5378f25f3e8da"
     },
     "data/edu_hra.csv": {
       "checksum": "e2fafdffe33c4b7360256c9bd5822615"
@@ -4789,6 +4546,45 @@
     "data/hhsize_hra.csv": {
       "checksum": "f3eeaa89ad26223b854e4f91099a482d"
     },
+    "data/hra_2020_nowater.zip": {
+      "checksum": "347fa6350a1f032ef3319615ea86e88c"
+    },
+    "data/hra_2020_nowater/hra_2020_nowater.dbf": {
+      "checksum": "574fa6d77d86820aa906e6877a311f71"
+    },
+    "data/hra_2020_nowater/hra_2020_nowater.prj": {
+      "checksum": "9cb5e74e06d0d22c1fcf70adcdc46302"
+    },
+    "data/hra_2020_nowater/hra_2020_nowater.shp": {
+      "checksum": "54316a6d019add2fd7c356cc3fd8188f"
+    },
+    "data/hra_2020_nowater/hra_2020_nowater.shx": {
+      "checksum": "e1e31752a31b53319b3a1d2ad2b4702e"
+    },
+    "data/hra_2020/hra_2020_nowater.dbf": {
+      "checksum": "33348630930207cfab184ae06529a555"
+    },
+    "data/hra_2020/hra_2020_nowater.prj": {
+      "checksum": "9cb5e74e06d0d22c1fcf70adcdc46302"
+    },
+    "data/hra_2020/hra_2020_nowater.shp": {
+      "checksum": "54316a6d019add2fd7c356cc3fd8188f"
+    },
+    "data/hra_2020/hra_2020_nowater.shx": {
+      "checksum": "e1e31752a31b53319b3a1d2ad2b4702e"
+    },
+    "data/hra_2020/hra_2020.dbf": {
+      "checksum": "33348630930207cfab184ae06529a555"
+    },
+    "data/hra_2020/hra_2020.prj": {
+      "checksum": "9cb5e74e06d0d22c1fcf70adcdc46302"
+    },
+    "data/hra_2020/hra_2020.shp": {
+      "checksum": "2b4cb0ac69b509f00c87fe4a15124f32"
+    },
+    "data/hra_2020/hra_2020.shx": {
+      "checksum": "8db29a6a7c89c4eb8f6008375c5368b5"
+    },
     "data/hra_age5_race_sex_proj_2000_2045.csv": {
       "checksum": "92f71de741adf499f06cd06551c1cf74"
     },
@@ -4798,32 +4594,143 @@
     "data/hra_race_projections.csv": {
       "checksum": "c4dc2431587b6c3858a83c201fec1cc2"
     },
+    "data/kc_chc.dbf": {
+      "checksum": "1ae5f750724842a50370ab285838ad03"
+    },
     "data/kc_chc.json": {
       "checksum": "95ab3855d67016db4218b47b28097fae"
+    },
+    "data/kc_chc.prj": {
+      "checksum": "c742bee3d4edfc2948a2ad08de1790a5"
+    },
+    "data/kc_chc.shp": {
+      "checksum": "3643af7081ac1a896f39f54ced168bf7"
+    },
+    "data/kc_chc.shx": {
+      "checksum": "9291bf143603f523f1f9cc264e8a2d00"
+    },
+    "data/kc_cr_station_2040.dbf": {
+      "checksum": "e2ce233c8d6b47b68bf0339c0e919000"
     },
     "data/kc_cr_station_2040.json": {
       "checksum": "aa33f25e180e12536640e5c5d817db0e"
     },
+    "data/kc_cr_station_2040.prj": {
+      "checksum": "c742bee3d4edfc2948a2ad08de1790a5"
+    },
+    "data/kc_cr_station_2040.shp": {
+      "checksum": "428ac81d53e2a7906d3afb4ef5daf8be"
+    },
+    "data/kc_cr_station_2040.shx": {
+      "checksum": "598b847ce22475ddc0bdfa43952fd8d8"
+    },
+    "data/kc_geography": {
+      "checksum": "3e15b081a5da9e06801bb4f59b00a777"
+    },
+    "data/kc_hra.dbf": {
+      "checksum": "6b432b48f679adae608e04ce5444265e"
+    },
     "data/kc_hra.json": {
       "checksum": "bb108172d1f8f496bfa7dd8019e6fbd2"
+    },
+    "data/kc_hra.prj": {
+      "checksum": "c742bee3d4edfc2948a2ad08de1790a5"
+    },
+    "data/kc_hra.shp": {
+      "checksum": "cc49ff544c50dd9aa99ea5f980a03dc2"
+    },
+    "data/kc_hra.shx": {
+      "checksum": "99d3db42e073a3be2b6a0ab13e607ca9"
+    },
+    "data/kc_lr_station_2040.dbf": {
+      "checksum": "ce76ebeb3aaf85ddd404a21126162ddd"
     },
     "data/kc_lr_station_2040.json": {
       "checksum": "665d395641927d9468a86c886273c869"
     },
+    "data/kc_lr_station_2040.prj": {
+      "checksum": "c742bee3d4edfc2948a2ad08de1790a5"
+    },
+    "data/kc_lr_station_2040.shp": {
+      "checksum": "35002d6ed403f1cdfc3eacfe726f25ee"
+    },
+    "data/kc_lr_station_2040.shx": {
+      "checksum": "9f46b59c7846896a601c5bb93cf57a0f"
+    },
+    "data/kc_public_clinics.dbf": {
+      "checksum": "05eaaa3fbcb5aa7aa820e1f47dd6c152"
+    },
     "data/kc_public_clinics.json": {
-      "checksum": "bbf1e97e608a41cc23c99133d18a49c3"
+      "checksum": "c6a4f94e213af758c0bb341e38437443"
+    },
+    "data/kc_public_clinics.prj": {
+      "checksum": "c742bee3d4edfc2948a2ad08de1790a5"
+    },
+    "data/kc_public_clinics.shp": {
+      "checksum": "f99ff34826300ba52b16250bc67f5685"
+    },
+    "data/kc_public_clinics.shx": {
+      "checksum": "fb3bd1160220f09d0a68bedee0ad43ac"
+    },
+    "data/kc_schools.dbf": {
+      "checksum": "d6be07c725abc3e7e28e123c3c5b71be"
     },
     "data/kc_schools.json": {
       "checksum": "02ad860979ecac930b06562d0845cd42"
     },
+    "data/kc_schools.prj": {
+      "checksum": "c742bee3d4edfc2948a2ad08de1790a5"
+    },
+    "data/kc_schools.shp": {
+      "checksum": "69e535494409e7a7e7368bc9e3b06cc1"
+    },
+    "data/kc_schools.shx": {
+      "checksum": "a7a5c1f1428b8a2e29865c49f6f2abc5"
+    },
+    "data/kc_tl_2040.dbf": {
+      "checksum": "c6f6715c14a3b0526c4eb92f1584ed09"
+    },
     "data/kc_tl_2040.json": {
       "checksum": "34a2c1f4e2e8a807e9762330105995f1"
+    },
+    "data/kc_tl_2040.prj": {
+      "checksum": "c742bee3d4edfc2948a2ad08de1790a5"
+    },
+    "data/kc_tl_2040.shp": {
+      "checksum": "f8021ba386e345d8caca39bb2cb63bb0"
+    },
+    "data/kc_tl_2040.shx": {
+      "checksum": "166d2a5f5b55f9f2efda65661fbf543d"
+    },
+    "data/kc_tract.dbf": {
+      "checksum": "af0a77de76a090dbf5c7e9c0df0bc941"
     },
     "data/kc_tract.json": {
       "checksum": "2aa00f69d5dbc94b6c3fff4080ab8c94"
     },
+    "data/kc_tract.prj": {
+      "checksum": "c742bee3d4edfc2948a2ad08de1790a5"
+    },
+    "data/kc_tract.shp": {
+      "checksum": "f0505319526f8580c8ddbf0cd394def7"
+    },
+    "data/kc_tract.shx": {
+      "checksum": "e119bfefdb8cf1bc190cd5da36beeb33"
+    },
+    "data/kc_wic.dbf": {
+      "checksum": "7fd04c63c041c7c0a0a2462bf4a7d00c"
+    },
     "data/kc_wic.json": {
       "checksum": "54512818d38b92b9796588675e4cc1f7"
+    },
+    "data/kc_wic.prj": {
+      "checksum": "c742bee3d4edfc2948a2ad08de1790a5"
+    },
+    "data/kc_wic.shp": {
+      "checksum": "31b71fd86ae429854624e6ebecac1b21"
+    },
+    "data/kc_wic.shx": {
+      "checksum": "ebe2322f4e9507c0bd75d652e58643d0"
     },
     "data/med_inc_tract.csv": {
       "checksum": "ff7195723da3862001e8cc64f1149ff4"

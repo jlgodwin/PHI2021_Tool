@@ -12,6 +12,7 @@ library(shinydashboard)
 library(shinyWidgets)
 library(shinycssloaders)
 library(shinyBS)
+library(sf)
 source("./00_utils.R")
 
 # Updated as of 9.9
@@ -269,8 +270,7 @@ ui <- dashboardPage(
                                 "Household Size",
                                 "Methods of Transportation to Work",
                                 "Median Gross Rent", "Number of Bedrooms",
-                                "Number of Occupants per Room"),
-                    # "Apartments", "Number of Units", "Smoothed Household Size"),
+                                "Number of Occupants per Room", "Craigslist Rents"),
                     selected = "Population"
                   )
                 ),
@@ -288,27 +288,30 @@ ui <- dashboardPage(
                   )
                 ),
                 
+                # conditionalPanel(
+                #   condition = "input.var == 'Smoothed Household Size'",
+                #   box(
+                #     width = NULL,
+                #     selectInput(
+                #       inputId = "geo_level",
+                #       label = "Geographic Level",
+                #       choices = c("Health Reporting Area (HRA)"),
+                #       selected = "Health Reporting Area (HRA)"
+                #     )
+                #   )
+                # ),
+                # Measure Box ####
+                
                 conditionalPanel(
-                  condition = "input.var == 'Smoothed Household Size'",
+                  condition = paste0("input.var != 'Methods of Transportation to Work'"
+                                     , "& input.var != 'Median Gross Rent'"
+                                     , "& input.var != 'Median Income'",
+                                     "& input.var != 'Craigslist Rents'"
+                                     ),
                   box(
                     width = NULL,
                     selectInput(
-                      inputId = "geo_level",
-                      label = "Geographic Level",
-                      choices = c("Health Reporting Area (HRA)"),
-                      selected = "Health Reporting Area (HRA)"
-                    )
-                  )
-                ),
-                ## Measure Box ####
-                conditionalPanel(
-                  condition = paste0("input.var != 'Methods of Transportation to Work'",
-                                     "& input.var != 'Median Gross Rent'",
-                                     "& input.var != 'Median Income'"),
-                  box(
-                    width = NULL,
-                    selectInput(
-                      inputId = "measure_type",
+                      inputId = "measure_type_cat",
                       label = "Measure",
                       choices = c("Count", "Prevalence", "Distribution"),
                       selected = "Count"
@@ -317,32 +320,47 @@ ui <- dashboardPage(
                 ),
                 
                 conditionalPanel(
-                  condition = paste0("input.var == 'Median Gross Rent'",
-                                     "| input.var == 'Median Income'",
-                                     "| input.var == ",
-                                     "'Methods of Transportation to Work'"),
+                  condition = paste0("input.var == 'Methods of Transportation to Work'"
+                                     , "| input.var == 'Median Gross Rent'"
+                                     , "| input.var == 'Median Income'",
+                                     "| input.var == 'Craigslist Rents'"),
                   box(
                     width = NULL,
                     selectInput(
-                      inputId = "measure_type",
+                      inputId = "measure_type_cont",
                       label = "Measure",
                       choices = c("Value"),
                       selected = "Value"
                     )
                   )
                 ),
-          
+                
+              
 
                 ## Year Box ####
-                
-                #ARA: I made the years 1 year sequences bc some of the data isn't avail every year
+              
+
+                conditionalPanel(
+                  condition = "input.var == 'Household Size'",
+                                    box(
+                                      width = NULL,
+
+                                      selectInput(
+                                        inputId = "year_house_size",
+                                        label = "Year",
+                                        choices = c("2005-2009", "2010-2014", "2015-2019"),
+                                        selected = "2015-2019"
+                                      )
+                                    )
+                ),
+
                 conditionalPanel(
                   condition = "input.var == 'Population'",
                   box(
                     width = NULL,
-                    
+
                     selectInput(
-                      inputId = "year",
+                      inputId = "year_pop",
                       label = "Year",
                       choices = paste0(seq(2000,2045,5), "-",
                                        seq(2004,2049,5)),
@@ -359,81 +377,123 @@ ui <- dashboardPage(
                     )
                   )
                 ),
-                    
+
                 conditionalPanel(
-                  condition = paste0("input.var == 'Education Level'",
-                                     "| input.var == 'Rent Burden'"),
+                  condition = "input.var == `Education Level`",
                   box(
                     width = NULL,
-                    
+
                     selectInput(
-                      inputId = "year",
+                      inputId = "year_edu",
                       label = "Year",
                       choices = paste0(seq(2005,2015,5), "-",
-                                       seq(2009,2019,5))[1],
+                                       seq(2009,2019,5)),
                       selected = "2015-2019"
                     )
                   )
                 ),
-                
+
                 conditionalPanel(
-                  condition = "input.var == 'Household Size'",
+                  condition = "input.var == 'Rent Burden'",
                   box(
                     width = NULL,
-                    
+
                     selectInput(
-                      inputId = "year",
+                      inputId = "year_rent_b",
                       label = "Year",
-                      choices = c("2000", "2005-2009", "2010", "2010-2014", "2015-2019")[1],
+                      choices = paste0(seq(2005,2015,5), "-",
+                                       seq(2009,2019,5)),
+                      selected = "2015-2019"
+                    )
+                  )
+                ),
+
+
+                conditionalPanel(
+                  condition = "input.var == 'Median Income'",
+                  box(
+                    width = NULL,
+
+                    selectInput(
+                      inputId = "year_med_income",
+                      label = "Year",
+                      choices = c("2009", "2010", "2011", "2012", "2013",
+                                  "2014", "2015", "2016", "2017", "2018",
+                                  "2019"),
+                      selected = "2019"
+                    )
+                  )
+                
+                ),
+                conditionalPanel(
+                  condition = "input.var == 'Median Gross Rent'",
+                  box(
+                    width = NULL,
+
+                    selectInput(
+                      inputId = "year_med_g_rent",
+                      label = "Year",
+                      choices = c("2005-2009", "2010-2014", "2015-2019"),
                       selected = "2015-2019"
                     )
                   )
                 ),
                 conditionalPanel(
+                  condition ="input.var == 'Number of Occupants per Room'",
+                  box(
+                    width = NULL,
+
+                    selectInput(
+                      inputId = "year_occupants",
+                      label = "Year",
+                      choices = c("2005-2009", "2010-2014", "2015-2019"),
+                      selected = "2015-2019"
+                    )
+                  )
+                ),
+                conditionalPanel(
+                  condition ="input.var == 'Methods of Transportation to Work'",
+                  box(
+                    width = NULL,
+
+                    selectInput(
+                      inputId = "year_methods_of_t",
+                      label = "Year",
+                      choices = c("2005-2009", "2010-2014", "2015-2019"),
+                      selected = "2015-2019"
+                    )
+                  )
+                ),conditionalPanel(
                   condition = "input.var == 'Number of Bedrooms'",
                   box(
                     width = NULL,
                     
                     selectInput(
-                      inputId = "year",
+                      inputId = "year_bed",
                       label = "Year",
-                      choices = c("2000", "2002", "2005", "2007", 
-                                  "2010", "2012", "2015", "2017", "2020")[1],
-                      selected = "2020"
-                    )
-                  )
-                ),
-                conditionalPanel(
-                  condition = "input.var == 'Median Income'",
-                  box(
-                    width = NULL,
-                    
-                    selectInput(
-                      inputId = "year",
-                      label = "Year",
-                      choices = c("2009", "2010", "2011", "2012", "2013", 
+                      choices = c("2009", "2010", "2011", "2012", "2013",
                                   "2014", "2015", "2016", "2017", "2018",
-                                  "2019")[1],
+                                  "2019"),
                       selected = "2019"
                     )
                   )
+                  
                 ),
                 conditionalPanel(
-                  condition = paste0("input.var == 'Median Gross Rent'",
-                                     "| input.var == 'Number of Occupants per Room'",
-                                     "| input.var == 'Methods of Transportation to Work'"),
+                  condition = "input.var == 'Craigslist Rents'",
                   box(
                     width = NULL,
                     
                     selectInput(
-                      inputId = "year",
+                      inputId = "year_craigslist",
                       label = "Year",
-                      choices = c("2005-2009", "2010-2014", "2015-2019")[1],
-                      selected = "2015-2019"
+                      choices = c("2017", "2018", "2019"),
+                      selected = "2019"
                     )
                   )
+                  
                 ),
-                
+
                 
                 ### End Year Box ####
                 
@@ -468,10 +528,10 @@ ui <- dashboardPage(
                       inputId = "race",
                       label = "Race and Ethnicity",
                       choices = c("All", 
-                                  "American Indian and Alaska Native (AIAN)",
+                                  "American Indian and\nAlaska Native (AIAN)",
                                   "Asian", "Black", 
                                   "Hispanic", 
-                                  "Native Hawaiian or Other Pacific Islander (NHOPI)", 
+                                  "Native Hawaiian or\nOther Pacific Islander (NHOPI)", 
                                   "Two or More Races", "White"),
                       selected = "All"
                     )
@@ -509,6 +569,7 @@ ui <- dashboardPage(
                     )
                   )
                 ),
+               
                
                ### Household Size Box ####
                conditionalPanel(
@@ -615,10 +676,37 @@ ui <- dashboardPage(
                      label = "Median Gross Rent",
                      choices = c("Median Gross Rent"),
                      selected = "Median Gross Rent"
-                     
+
                    )
                  )
                ),
+               
+               ### Craigslist Box ####
+               conditionalPanel(
+                 condition = "input.var == 'Craigslist Rents'",
+                 # box(
+                 #   width = NULL,
+                 #   selectInput(
+                 #     inputId = "craigslist_rent",
+                 #     label = "Median Rent",
+                 #     choices = c("Median Rent"),
+                 #     selected = "Median Rent"
+                 #     
+                 #   )
+                 # ),
+                 box(
+                   width = NULL,
+                   
+                   selectInput(
+                     inputId = "craigslist_bedrooms",
+                     label = "Bedrooms",
+                     choices = paste0(0:4, c(rep("", 4), "+")),
+                     selected = "0",
+                     multiple = FALSE
+                   )
+                 )
+               ),
+               
                 ### Age Box ####
                 conditionalPanel(
                   condition = "input.var == 'Population'",
@@ -762,7 +850,13 @@ ui <- dashboardPage(
             tags$li("Chris Govella"),
             tags$li("Mary Jewell"),
             tags$li("Oliver Tjalve"),
-            tags$li("Maxine Wright")
+            tags$li("Maxine Wright"),
+            tags$li("Rachel Song"),
+            tags$li("Zhaowen Guo"),
+            tags$li("Pamela Lim"),
+            tags$li("Tiffany Childs"),
+            tags$li("Lily Bates")
+            
           )
         ),
         

@@ -632,7 +632,6 @@ server <- function(input, output, session) {
       ) %>%
       ungroup()
     
-    
     geo_year_df
   })
   

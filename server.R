@@ -1406,23 +1406,23 @@ server <- function(input, output, session) {
   
   # this function updates the map based on user input
   # Begin shape observe() ####
-  observe({
+  observe({  
+    
     shinyjs::showElement(id = 'loading')
-    
-    var <- var_reactive()
-    geo <- geo_reactive()
-    measure <- measure_reactive()
-    
-    year <- year_reactive()
-    
-    
+    ## map aesthetics ####
     geo_df <- geo_df_reactive()
     geo_year_df <- geo_year_df_reactive()
     selected_df <- selected_df_reactive()
     measure_df <- measure_df_reactive()
-    
-    ## sp_reactive() ####
     sp <- sp_reactive()
+    year <- year_reactive()
+    pal <- pal_reactive()
+    legend_title <- legend_title_reactive()
+    popup <- popup_text_reactive()
+    unique_quant_length <- unique_quant_length_reactive()
+    legend_values <- legend_values_reactive()
+    col_pal <- col_pal_reactive()
+    
     
     ## proxy_map ####
     leafletProxy(
@@ -1449,26 +1449,9 @@ server <- function(input, output, session) {
     #   options = pathOptions(pane = "layer2")
     # )
     
-  })
   
   # Begin color/legend observe() ####
-  observe({  
-    ## map aesthetics ####
-    geo_df <- geo_df_reactive()
-    geo_year_df <- geo_year_df_reactive()
-    selected_df <- selected_df_reactive()
-    measure_df <- measure_df_reactive()
-    sp <- sp_reactive()
-    year <- year_reactive()
-    pal <- pal_reactive()
-    legend_title <- legend_title_reactive()
-    popup <- popup_text_reactive()
-    unique_quant_length <- unique_quant_length_reactive()
-    legend_values <- legend_values_reactive()
-    col_pal <- col_pal_reactive()
-    
-    
-    # proxy_map old ####
+
     
     # Create all_selected ####
     # all_selected <- FALSE
@@ -1653,8 +1636,8 @@ server <- function(input, output, session) {
     #}
     
     
-    Sys.sleep(1)
-    
+    # Sys.sleep(1)
+    # 
     shinyjs::hideElement(id = 'loading')
   })
   

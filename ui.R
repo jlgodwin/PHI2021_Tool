@@ -440,9 +440,8 @@ ui <- dashboardPage(
                     selectInput(
                       inputId = "year_med_income",
                       label = "Year",
-                      choices = c("2009", "2010", "2011", "2012", "2013",
-                                  "2014", "2015", "2016", "2017", "2018",
-                                  "2019"),
+                      choices = paste0(seq(2005,2015,5), "-",
+                                       seq(2009,2019,5)),
                       selected = "2019"
                     )
                   )

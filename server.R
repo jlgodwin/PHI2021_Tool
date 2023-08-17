@@ -1,3 +1,4 @@
+
 # Libraries ####
 library(shiny)
 library(sf)
@@ -2021,4 +2022,3 @@ server <- function(input, output, session) {
   outputOptions(output, "map", suspendWhenHidden = FALSE)
   # outputOptions(output, "plot", suspendWhenHidden = FALSE)
 }
-

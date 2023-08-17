@@ -276,13 +276,36 @@ ui <- dashboardPage(
                 ),
                 ## Geo Box ####
                 conditionalPanel(
-                  condition = "input.var != 'Smoothed Household Size'",
+                  condition = paste0("input.var != 'Smoothed Household Size'"
+                                     , "& input.var != 'Median Income'"
+                                     , "& input.var != 'Methods of Transportation to Work'",
+                                     "& input.var != 'Number of Occupants per Room'",
+                                     "& input.var != 'Number of Bedrooms'",
+                                     "& input.var != 'Craigslist Rents'"
+                  ),
                   box(
                     width = NULL,
                     selectInput(
                       inputId = "geo_level",
                       label = "Geographic Level",
                       choices = c("Census Tract", "Health Reporting Area (HRA)"),
+                      selected = "Census Tract"
+                    )
+                  )
+                ),conditionalPanel(
+                  condition = paste0("input.var == 'Smoothed Household Size'"
+                                     , "| input.var == 'Median Income'"
+                                     , "| input.var == 'Methods of Transportation to Work'",
+                                     "| input.var == 'Number of Occupants per Room'",
+                                     "| input.var == 'Number of Bedrooms'",
+                                     "| input.var == 'Craigslist Rents'"
+                  ),
+                  box(
+                    width = NULL,
+                    selectInput(
+                      inputId = "geo_level",
+                      label = "Geographic Level",
+                      choices = c("Census Tract"),
                       selected = "Census Tract"
                     )
                   )
@@ -471,10 +494,9 @@ ui <- dashboardPage(
                     selectInput(
                       inputId = "year_bed",
                       label = "Year",
-                      choices = c("2009", "2010", "2011", "2012", "2013",
-                                  "2014", "2015", "2016", "2017", "2018",
-                                  "2019"),
-                      selected = "2019"
+                      choices = c("2000", "2002", "2005", "2007", "2010",
+                                  "2012", "2015", "2017", "2020"),
+                      selected = "2020"
                     )
                   )
                   
@@ -595,7 +617,7 @@ ui <- dashboardPage(
                    selectInput(
                      inputId = "bedrooms",
                      label = "Bedrooms",
-                     choices = paste0(1:6, c(rep("", 5), "+")),
+                     choices = paste0(0:6, c(rep("", 5), "+")),
                      selected = "1",
                      multiple = FALSE
                    )
@@ -701,7 +723,7 @@ ui <- dashboardPage(
                      inputId = "craigslist_bedrooms",
                      label = "Bedrooms",
                      choices = paste0(0:4, c(rep("", 4), "+")),
-                     selected = "0",
+                     selected = "1",
                      multiple = FALSE
                    )
                  )

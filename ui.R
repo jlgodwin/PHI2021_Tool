@@ -270,7 +270,8 @@ ui <- dashboardPage(
                                 "Household Size",
                                 "Methods of Transportation to Work",
                                 "Median Gross Rent", "Number of Bedrooms",
-                                "Number of Occupants per Room", "Craigslist Rents"),
+                                "Number of Occupants per Room", "SORL Craigslist Rents",
+                                "EHD"),
                     selected = "Population"
                   )
                 ),
@@ -281,7 +282,7 @@ ui <- dashboardPage(
                                      , "& input.var != 'Methods of Transportation to Work'",
                                      "& input.var != 'Number of Occupants per Room'",
                                      "& input.var != 'Number of Bedrooms'",
-                                     "& input.var != 'Craigslist Rents'"
+                                     "& input.var != 'EHD'"
                   ),
                   box(
                     width = NULL,
@@ -298,7 +299,7 @@ ui <- dashboardPage(
                                      , "| input.var == 'Methods of Transportation to Work'",
                                      "| input.var == 'Number of Occupants per Room'",
                                      "| input.var == 'Number of Bedrooms'",
-                                     "| input.var == 'Craigslist Rents'"
+                                     "| input.var == 'EHD'"
                   ),
                   box(
                     width = NULL,
@@ -329,7 +330,8 @@ ui <- dashboardPage(
                   condition = paste0("input.var != 'Methods of Transportation to Work'"
                                      , "& input.var != 'Median Gross Rent'"
                                      , "& input.var != 'Median Income'",
-                                     "& input.var != 'Craigslist Rents'"
+                                     "& input.var != 'SORL Craigslist Rents'",
+                                     "& input.var != 'EHD'"
                                      ),
                   box(
                     width = NULL,
@@ -346,7 +348,7 @@ ui <- dashboardPage(
                   condition = paste0("input.var == 'Methods of Transportation to Work'"
                                      , "| input.var == 'Median Gross Rent'"
                                      , "| input.var == 'Median Income'",
-                                     "| input.var == 'Craigslist Rents'"),
+                                     "| input.var == 'SORL Craigslist Rents'"),
                   box(
                     width = NULL,
                     selectInput(
@@ -354,6 +356,18 @@ ui <- dashboardPage(
                       label = "Measure",
                       choices = c("Value"),
                       selected = "Value"
+                    )
+                  )
+                ),
+                conditionalPanel(
+                  condition = "input.var == 'EHD'",
+                  box(
+                    width = NULL,
+                    selectInput(
+                      inputId = "measure_type_binary",
+                      label = "Measure",
+                      choices = c("Binary"),
+                      selected = "Binary"
                     )
                   )
                 ),
@@ -501,7 +515,7 @@ ui <- dashboardPage(
                   
                 ),
                 conditionalPanel(
-                  condition = "input.var == 'Craigslist Rents'",
+                  condition = "input.var == 'SORL Craigslist Rents'",
                   box(
                     width = NULL,
                     
@@ -510,6 +524,20 @@ ui <- dashboardPage(
                       label = "Year",
                       choices = c("2017", "2018", "2019"),
                       selected = "2019"
+                    )
+                  )
+                  
+                ),
+                conditionalPanel(
+                  condition = "input.var == 'EHD'",
+                  box(
+                    width = NULL,
+                    
+                    selectInput(
+                      inputId = "year_EHD",
+                      label = "Year",
+                      choices = c("2023"),
+                      selected = "2023"
                     )
                   )
                   
@@ -704,17 +732,7 @@ ui <- dashboardPage(
                
                ### Craigslist Box ####
                conditionalPanel(
-                 condition = "input.var == 'Craigslist Rents'",
-                 # box(
-                 #   width = NULL,
-                 #   selectInput(
-                 #     inputId = "craigslist_rent",
-                 #     label = "Median Rent",
-                 #     choices = c("Median Rent"),
-                 #     selected = "Median Rent"
-                 #     
-                 #   )
-                 # ),
+                 condition = "input.var == 'SORL Craigslist Rents'",
                  box(
                    width = NULL,
                    
@@ -724,6 +742,20 @@ ui <- dashboardPage(
                      choices = paste0(0:4, c(rep("", 4), "+")),
                      selected = "1",
                      multiple = FALSE
+                   )
+                 )
+               ),
+               ### EHD ####
+               conditionalPanel(
+                 condition = "input.var == 'EHD'",
+                 box(
+                   width = NULL,
+                   selectInput(
+                     inputId = "env_h_dis",
+                     label = "EHD",
+                     choices = c("EHD"),
+                     selected = "EHD"
+                     
                    )
                  )
                ),

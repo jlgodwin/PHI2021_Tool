@@ -34,16 +34,19 @@ if (!file.exists("./data/kc_schools.shp")) {
 ## Load ####
 
 ### KC tracts .shp ####
-#  message("Read tract data.shp.\n")
+message("Read tract data.shp.\n")
 # kc_tract_spdf_20 <- read_sf(dsn="./data/census_tracts_2020/", layer= "2020_Census_Tracts_for_King_County___tracts20_area")
 # kc_tract_spdf_20 <- kc_tract_spdf_20 %>% rename("GEOID" = "GEO_ID_TRT")
-#  
+# 
 # kc_tract_spdf_10 <- read_sf(dsn="./data/", layer= "kc_tract")
-#  
+# 
 #  ### KC HRA .shp ####
 #  message("Read hra data.shp.\n")
 # kc_hra_spdf_20 <- read_sf(dsn= "./data/hra_2020/", layer="hra_2020_nowater")
-#  
+# kc_hra_spdf_20 <- kc_hra_spdf_20 %>%
+#   rename("GEOID" = "name")
+# st_crs(kc_hra_spdf_20) <- st_crs(kc_tract_spdf_10)
+# 
 # kc_hra_spdf_10 <- read_sf(dsn = "./data/", layer="kc_hra")
 # 
 # 
@@ -241,12 +244,12 @@ tract_bedrooms <- tract_bedrooms %>%
 
 message("Read Tract-Level Craiglist Data \n")
 craigslist_tract <- read.csv(
-  file = "./data/craigslist_tract.csv",
+  file = "./data/craigslist_tract_beds4.csv",
   colClasses = c("tract_geoid" = "character",
                  "mean" = "double"))
 craigslist_tract$year <- as.integer(craigslist_tract$year)
 craigslist_tract$bedrooms <- as.numeric(craigslist_tract$bedrooms)
-craigslist_tract <- craigslist_tract %>% 
+craigslist_tract <- craigslist_tract %>%
   rename("GEOID" = "tract_geoid",
          "Year" = "year",
          "value" = "Q_50",
@@ -254,9 +257,8 @@ craigslist_tract <- craigslist_tract %>%
 craigslist_tract[is.na(craigslist_tract)] = 0
 craigslist_tract$moe <- craigslist_tract$sd/sqrt(craigslist_tract$n)
 
-# message("Read HRA-Level Craiglist Data \n")
 craigslist_hra <- read.csv(
-  file = "./data/craigslist_hra.csv")
+  file = "./data/craigslist_hra_beds4.csv")
 craigslist_hra <- craigslist_hra %>%
   rename("Year" = "year",
          "GEOID" = "hra_name",
@@ -264,6 +266,20 @@ craigslist_hra <- craigslist_hra %>%
          "short_label" = "bedrooms")
 craigslist_hra[is.na(craigslist_hra)] = 0
 craigslist_hra$moe <- craigslist_hra$sd/sqrt(craigslist_hra$n)
+
+# EHD Data ---------------------------------------------------------
+env_h_disparities <- read_sf(dsn= "./data/n_context_data/env_h_disparities.shp")
+env_h_disparities <- env_h_disparities %>% 
+  st_drop_geometry() %>% 
+  select(-HRA_name) %>% 
+  group_by(GEO_ID_TRT) %>% 
+  summarize(EHD_percen = unique(EHD_percen)) %>% 
+  mutate(Year = "2023",
+         moe = "0",
+         short_label = "EHD") %>% 
+  rename("GEOID" = "GEO_ID_TRT",
+         "value" = "EHD_percen")
+
 
 # Server Function ####
 server <- function(input, output, session) {
@@ -292,8 +308,10 @@ server <- function(input, output, session) {
   ## measure_reactive  ####
   measure_reactive <- reactive({
     if(input$var %in% c("Median Income", "Methods of Transportation to Work",
-                        "Median Gross Rent", "Craigslist Rents")){
+                        "Median Gross Rent", "SORL Craigslist Rents")){
       input$measure_type_cont
+    }else if(input$var %in% c("EHD")){
+      input$measure_type_binary
     }else{
       input$measure_type_cat
     }  
@@ -333,8 +351,10 @@ server <- function(input, output, session) {
       year <- as.numeric(strsplit(input$year_occupants, "-")[[1]][2])
     }else if(input$var == "Methods of Transportation to Work"){
       year <- as.numeric(strsplit(input$year_methods_of_t, "-")[[1]][2])
-    }else if(input$var == "Craigslist Rents"){
+    }else if(input$var == "SORL Craigslist Rents"){
       year <- as.numeric(strsplit(input$year_craigslist, "-")[[1]][1])
+    }else if(input$var == "EHD"){
+      year <- 2023
     }
     year
   })
@@ -453,9 +473,6 @@ server <- function(input, output, session) {
   })
   
   ## craigslist_reactive  ####
-  # craigslist_rent_reactive <- reactive({
-  #   input$craigslist_rent
-  # })
   
   craigslist_bedroom_reactive <- reactive({
     if(input$craigslist_bedrooms == "4+"){
@@ -464,6 +481,13 @@ server <- function(input, output, session) {
       as.numeric(input$craigslist_bedrooms)
     }
   })
+  
+  ## env_h_reactive  ####
+  env_h_reactive <- reactive({
+    input$env_h_dis
+  })
+  
+  # measure_df <- env_h_disparities
   
   ## all_selected ####
   # return TRUE if "Prevalence" and the whole population are selected; 
@@ -587,11 +611,18 @@ server <- function(input, output, session) {
       }
     }
     ## CraigsList ####
-    else if (var == "Craigslist Rents"){
+    else if (var == "SORL Craigslist Rents"){
       if(geo){
         geo_df <- craigslist_tract 
       }else{
         geo_df <- craigslist_hra
+      }
+    }
+    ## EHD ####
+    else if (var == "EHD"){
+      if(geo){
+        geo_df <- env_h_disparities
+      }else{
       }
     }
     
@@ -624,7 +655,6 @@ server <- function(input, output, session) {
     measure <- measure_reactive()
     
     geo_year_df <- geo_df %>%
-      #           filter(Year %in% year) %>%
       filter(Year == year) %>%
       group_by(GEOID) %>%
       mutate(
@@ -761,10 +791,16 @@ server <- function(input, output, session) {
       
     }
     #### Craigslist ####
-    else if (var == "Craigslist Rents"){
+    else if (var == "SORL Craigslist Rents"){
       selected_df <- geo_year_df %>%
         filter(short_label == craigslist_bedroom_reactive())  
-      #            group_by(GEOID) already grouped by geoid
+    }
+    #### EHD ####
+    else if (var == "EHD"){
+      selected_df <- geo_year_df 
+      # %>%
+      #   filter(short_label %in% env_h_reactive()) %>% 
+      #   group_by(GEOID)
     }
     
     selected_df
@@ -825,6 +861,13 @@ server <- function(input, output, session) {
             SE = round(moe/qnorm(.95) * 10^4) / 10^2
           ) %>%
           ungroup()
+      }else if (measure  == "Binary"){
+        measure_df <- selected_df %>%
+          mutate(
+            value = round(value, 1),
+            SE = 0
+          ) %>%
+          ungroup() 
       }
     } 
     measure_df
@@ -849,7 +892,7 @@ server <- function(input, output, session) {
     # }
     ### Add to Spatial Data ####
     # merge the dataframe with the corresponding geographic level GIS data and return
-    if (var == "Craigslist Rents") {
+    if (var == 'SORL Craigslist Rents') {
       if(geo){
         kc_tract_spdf_20 %>% 
           left_join(measure_df, by = "GEOID")
@@ -857,7 +900,7 @@ server <- function(input, output, session) {
         kc_hra_spdf_20 %>% 
           left_join(measure_df, by = "GEOID")
       }
-    } else {
+    }else {
       if(geo){
         kc_tract_spdf_10 %>% 
           left_join(measure_df, by = "GEOID")
@@ -896,8 +939,12 @@ server <- function(input, output, session) {
         "Median Gross Rent (Dollars)"
       }else if (var == "Number of Bedrooms"){
         "Number of Bedrooms"
-      }else if (var == "Craigslist Rents"){
+      }else if (var == "SORL Craigslist Rents"){
         "Median Rent (Dollars)"
+      }
+    }else if (measure == "Binary"){
+      if(var == "EHD"){
+        "EHD Percentile"
       }
     }
   })
@@ -929,23 +976,27 @@ server <- function(input, output, session) {
         measure_prefix <-  "Median Age: "
       }else if (var == "Median Gross Rent"){
         measure_prefix <-   "Median Gross Rent: $"
-      }else if (var == "Craigslist Rents"){
+      }else if (var == "SORL Craigslist Rents"){
         measure_prefix <-   "Median Rent: $"
       }
+    }else if (measure == "Binary"){
+      if(var == "EHD"){
+        measure_prefix <-  "EHD Percentile: "
+      }
     }
-    
-    uncertainty <- "SE: <strong>%g</strong>"
-    
-    if(straight_pipe_hh()){
-      uncertainty <- "(<strong>%g</strong>, <strong>%g</strong>)"
-    } 
-    
-    paste0(geo_prefix,
-           "<strong>%s</strong><br/>", # GEOID
-           measure_prefix,
-           "<strong>%g</strong><br/>", # value
-           uncertainty)
-  })
+  
+  uncertainty <- "SE: <strong>%g</strong>"
+  
+  if(straight_pipe_hh()){
+    uncertainty <- "(<strong>%g</strong>, <strong>%g</strong>)"
+  } 
+  
+  paste0(geo_prefix,
+         "<strong>%s</strong><br/>", # GEOID
+         measure_prefix,
+         "<strong>%g</strong><br/>", # value
+         uncertainty)
+})
   
   ## unique_quantile_length_reactive ####
   
@@ -1050,6 +1101,9 @@ server <- function(input, output, session) {
     # # load Community Health Centers GIS data
     kc_chc <- read_sf("./data/kc_chc.shp")
     # 
+    # # load schools - need to figure out server code
+    # school_districts <- read_sf(dsn= "./data/n_context_data/schooldist.shp")
+    #
     # # load school sites data
     kc_schools <- read_sf("./data/kc_schools.shp")
     # 
@@ -1063,6 +1117,8 @@ server <- function(input, output, session) {
       "School - Other facility" = kc_schools[kc_schools$CODE == "School - Other facility", ],
       "School - K thru 12" = kc_schools[kc_schools$CODE == "School - K thru 12", ]
     )
+    #load school districts 
+    school_districts <- read_sf(dsn= "./data/n_context_data/schooldist.shp")
     
     # remove the loading page and show the main content
     shinyjs::hideElement(id = "initializing_page")
@@ -1143,6 +1199,12 @@ server <- function(input, output, session) {
       addMapPane(
         name = "layer14",
         zIndex = "424") %>% 
+      addMapPane(
+        name = "layer15",
+        zIndex = "425") %>% 
+      addMapPane(
+        name = "layer16",
+        zIndex = "426") %>%
       ## Add public facility layers ####
     addMarkers(
       data = kc_public_clinics,
@@ -1368,13 +1430,27 @@ server <- function(input, output, session) {
         group = "Transit Lines (2040)",
         color = "#62AC55",
         weight = 3,
-        opacity = 0.2,
+        opacity = 1,
         popup = sprintf(
           "Transit Line Name: <strong>%s</strong>",
           kc_tl_2040$Name
         ) %>%
           lapply(htmltools::HTML),
-        options = pathOptions(pane = "layer2")
+        options = pathOptions(pane = "layer16")
+      ) %>%
+      addPolygons(
+        data = school_districts,
+        group = "School Districts",
+        color = "#62AC55",
+        weight = 3,
+        opacity = 0.2,
+        fill= FALSE,
+        popup = sprintf(
+          "School District: <strong>%s</strong>",
+          school_districts$NAME
+        ) %>%
+          lapply(htmltools::HTML),
+        options = pathOptions(pane = "layer15")
       ) %>%
       addLayersControl(
         overlayGroups = c(
@@ -1384,7 +1460,8 @@ server <- function(input, output, session) {
           paste(names(kc_schools), "(2018)"),
           "Commuter Rail Stations (2040)",
           "Light Rail Stations (2040)",
-          "Transit Lines (2040)"
+          "Transit Lines (2040)",
+          "School Districts"
         ),
         options = layersControlOptions(collapsed = TRUE)
       ) %>%
@@ -2037,5 +2114,5 @@ server <- function(input, output, session) {
   # preload the visualization once the website is opened
   outputOptions(output, "map", suspendWhenHidden = FALSE)
   # outputOptions(output, "plot", suspendWhenHidden = FALSE)
-}
+  }
 

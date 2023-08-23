@@ -1,0 +1,18 @@
+station,type,numof.routes,lat,long,geometry,HRA_name
+Shoreline South/145th,Link,1,47.73609559,-122.3252186,"c(-122.325218604375, 47.7360955875299)",Shoreline
+Shoreline North/185th,Link,1,47.76407546,-122.3228359,"c(-122.322835872886, 47.7640754631278)",Shoreline
+South 272nd Street,Link,1,47.35937255,-122.2973876,"c(-122.297387591187, 47.3593725468982)",Kent - West
+Federal Way Transit Center,Link,1,47.3158589,-122.3038513,"c(-122.30385129384, 47.3158589042091)",Federal Way - North Corridor
+Kent/Des Moines,Link,1,47.38949214,-122.2944123,"c(-122.294412266933, 47.389492135373)",Kent - West
+Mercer Island,Link,1,47.58819822,-122.2332317,"c(-122.233231674258, 47.5881982182774)",Mercer Island and Point Cities
+Judkins Park,Link,1,47.59029914,-122.3045085,"c(-122.30450854418, 47.5902991394747)","Seattle - Central District, Chinatown-International District, Judkins, and North Beacon Hill"
+South Bellevue,Link,1,47.586556,-122.1903958,"c(-122.190395805129, 47.5865560029655)",Bellevue - West
+East Main,Link,1,47.60818768,-122.1911471,"c(-122.191147149588, 47.6081876825052)",Bellevue - West
+Bellevue Downtown,Link,1,47.61522315,-122.1920843,"c(-122.192084303878, 47.6152231527556)",Bellevue - West
+Wilburton,Link,1,47.61796735,-122.1837618,"c(-122.183761792679, 47.6179673478264)",Bellevue - Northeast
+Spring District/120th,Link,1,47.62377319,-122.1785731,"c(-122.178573080987, 47.6237731902267)",Bellevue - Northeast
+Bel-Red/130th,Link,1,47.62444836,-122.1656403,"c(-122.165640324183, 47.6244483624354)",Bellevue - Northeast
+Overlake Village,Link,1,47.63630963,-122.1389196,"c(-122.138919607236, 47.6363096318937)",Redmond - South
+Redmond Technology,Link,1,47.64484158,-122.1336282,"c(-122.133628214646, 47.6448415835432)",Redmond - South
+Downtown Redmond,Link,1,47.67164488,-122.1184801,"c(-122.118480056646, 47.6716448782428)",Redmond - North
+SE Redmond,Link,1,47.66726325,-122.1097996,"c(-122.109799624208, 47.6672632483985)",Redmond - South

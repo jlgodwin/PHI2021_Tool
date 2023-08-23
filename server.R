@@ -4,45 +4,18 @@ library(sf)
 library(dplyr)
 library(tidyr)
 
-#change this
-#setwd("C:/Saved Files/PHI Fellowship/Shinyapp/data")
-
 # Load Data ####
 
-## Download ####
-
-
-### KC public clinics ,json ####
-
-if (!file.exists("./data/kc_public_clinics.shp")) {
-  download_kc_public_clinics()
-  while (!file.exists("./data/kc_public_clinics.shp")) {
-    Sys.sleep(1)
-  }
-  
-}
-#
-### KC school sites .json ####
-if (!file.exists("./data/kc_schools.shp")) {
-  download_kc_schools()
-  while (!file.exists("./data/kc_schools.shp")) {
-    Sys.sleep(1)
-  }
-  
-}
-
-## Load ####
-
-### KC tracts .shp ####
+### KC Geography Load ####
 message("Read tract data.shp.\n")
 # kc_tract_spdf_20 <- read_sf(dsn="./data/census_tracts_2020/", layer= "2020_Census_Tracts_for_King_County___tracts20_area")
 # kc_tract_spdf_20 <- kc_tract_spdf_20 %>% rename("GEOID" = "GEO_ID_TRT")
 # 
 # kc_tract_spdf_10 <- read_sf(dsn="./data/", layer= "kc_tract")
 # 
-#  ### KC HRA .shp ####
+
 #  message("Read hra data.shp.\n")
-# kc_hra_spdf_20 <- read_sf(dsn= "./data/hra_2020/", layer="hra_2020_nowater")
+#kc_hra_spdf_20 <- read_sf(dsn= "./data/hra_2020/hra_2020_nowater.shp")
 # kc_hra_spdf_20 <- kc_hra_spdf_20 %>%
 #   rename("GEOID" = "name")
 # st_crs(kc_hra_spdf_20) <- st_crs(kc_tract_spdf_10)
@@ -50,21 +23,12 @@ message("Read tract data.shp.\n")
 # kc_hra_spdf_10 <- read_sf(dsn = "./data/", layer="kc_hra")
 # 
 # 
-# # KC Geography Load -------------------------------------------------------
-# 
 # save(kc_tract_spdf_10,kc_tract_spdf_20,kc_hra_spdf_10,kc_hra_spdf_20, file= "./data/kc_geography")
 
 load("./data/kc_geography")
 
-### Transit lines .shp ####
-kc_tl_2040 <- read_sf("./data/kc_tl_2040.shp")
-while (!exists("kc_tl_2040")) {
-  Sys.sleep(1)
-}
 
-
-### Population Projection csv ####
-#### Tract level ####
+### Population projections- tract ####
 message("Read tract-level population projections .csv.\n")
 tract_proj_2015 <- read.csv(
   file = "./data/tract_age5_race_sex_proj_2000_2015.csv",
@@ -91,7 +55,7 @@ while (!exists("tract_proj")) {
   Sys.sleep(1)
 }
 
-#### HRA-level ####
+### Population projections- HRA ####
 message("Read HRA-level population projections .csv.\n")
 
 hra_proj <- read.csv(
@@ -105,7 +69,7 @@ while (!exists("hra_proj")) {
   Sys.sleep(1)
 }
 
-### Median Income csv ####
+### Median Income CSV ####
 #### Tract-level
 message("Read tract-level median income .csv.\n")
 tract_inc <- read.csv(
@@ -119,7 +83,7 @@ while (!exists("tract_inc")) {
 }
 
 ### Education csv ####
-#### Tract-level ####
+#### Tract-level
 message("Read tract-level educational attainment .csv.\n")
 tract_edu <- read.csv(
   file = "./data/tract_edu_attainmentv2.csv",
@@ -129,7 +93,7 @@ while (!exists("tract_edu")) {
   Sys.sleep(1)
 }
 
-#### HRA-level ####
+#### HRA-level
 message("Read HRA-level educational attainment .csv.\n")
 hra_edu <- read.csv(
   file = "./data/edu_hra.csv",
@@ -145,7 +109,7 @@ hra_edu$Race <- NA #same with race
 hra_edu$moe <- 1.65*hra_edu$SE #SE = MOE/Z
 
 ### Rent burden csv ####
-#### Tract-level ####
+#### Tract-level
 message("Read tract-level rent burden .csv.\n")
 tract_burden <- read.csv(
   file = "./data/tract_rent_burden_pop.csv",
@@ -155,7 +119,7 @@ while (!exists("tract_burden")) {
   Sys.sleep(1)
 }
 
-#### HRA-level ####
+#### HRA-level
 message("Read HRA-level rent burden .csv.\n")
 hra_burden <- read.csv(
   file = "./data/burden_hra.csv",
@@ -200,7 +164,7 @@ tract_med_rent <- read.csv(
 )
 
 ### Household size csv ####
-#### Tract-level ####
+#### Tract-level
 message("Read Tract-level household size \n")
 tract_hhsize <- read.csv(
   file = "./data/hh_by_hh_size_and_tenure_ct.csv",
@@ -209,7 +173,7 @@ tract_hhsize <- read.csv(
 tract_hhsize <- subset(tract_hhsize, short_label > 0 & !is.na(short_label))
 tract_hhsize$size <- tract_hhsize$short_label
 
-#### HRA-level ####
+#### HRA-level
 message("Read HRA-level household size \n")
 hra_hhsize <- read.csv(
   file = "./data/hhsize_hra.csv",
@@ -240,7 +204,7 @@ tract_bedrooms <- tract_bedrooms %>%
   rename("short_label" = "Bedrooms")
 
 
-# Craigslist Data ---------------------------------------------------------
+###Craigslist Data ---------------------------------------------------------
 
 message("Read Tract-Level Craiglist Data \n")
 craigslist_tract <- read.csv(
@@ -267,7 +231,7 @@ craigslist_hra <- craigslist_hra %>%
 craigslist_hra[is.na(craigslist_hra)] = 0
 craigslist_hra$moe <- craigslist_hra$sd/sqrt(craigslist_hra$n)
 
-# EHD Data ---------------------------------------------------------
+###EHD Data ---------------------------------------------------------
 env_h_disparities <- read_sf(dsn= "./data/n_context_data/env_h_disparities.shp")
 env_h_disparities <- env_h_disparities %>% 
   st_drop_geometry() %>% 
@@ -281,10 +245,10 @@ env_h_disparities <- env_h_disparities %>%
          "value" = "EHD_percen")
 
 
-# Server Function ####
+#Server Reactives ####
 server <- function(input, output, session) {
   
-  ## var_reactive ####
+  ##var_reactive ####
   # ARA_ Choose variable
   var_reactive <- reactive({
     input$var
@@ -523,7 +487,7 @@ server <- function(input, output, session) {
     }
   })
   
-  ## geo_year_df_reactive ####
+  #geo_df_reactive ####
   
   # selected geographic level and then selected age groups
   # ARA_: conditional branch to differentiate selected df based off of var selection
@@ -626,7 +590,7 @@ server <- function(input, output, session) {
       }
     }
     
-    ### Rename geo_year_df for HH Smoothed ####
+    ##HH Smoothed ####
     # relies on measure_reactive value
     if(straight_pipe_hh()) {
       if(input$measure_type == "Count"){
@@ -648,6 +612,7 @@ server <- function(input, output, session) {
     geo_df
   })
   
+  ## geo_year_df_reactive ####
   geo_year_df_reactive <- reactive({
     
     geo_df <- geo_df_reactive()
@@ -665,23 +630,14 @@ server <- function(input, output, session) {
     geo_year_df
   })
   
-  ## selected_df_reactive ####
-  ### Variable Filters ####      
+  ## selected_df_reactive - Variable Filters ####      
   #ARA: These filter by user-inputted variable specific demographics
-  #### Population ####
+  ### Population ####
   selected_df_reactive <- reactive({
     geo_df <- geo_df_reactive()
     geo_year_df <- geo_year_df_reactive()
     var <- var_reactive()
     year <- year_reactive()
-    
-    # geo_year_df <- geo_df %>% 
-    #     filter(Year %in% year) %>%
-    #     group_by(GEOID) %>%
-    #     mutate(
-    #         prev_total = sum(value)
-    #     ) %>%
-    #     ungroup() 
     
     
     if (var == "Population"){
@@ -695,7 +651,7 @@ server <- function(input, output, session) {
                   moe = sum(moe))
       
     }
-    #### Education ####
+    ### Education ####
     else if (var == "Education Level"){
       selected_df <- geo_year_df %>%
         filter(short_label %in% edu_reactive(),
@@ -707,7 +663,7 @@ server <- function(input, output, session) {
                    moe = sum(moe))
       
     }           
-    #### Rent Burden ####
+    ### Rent Burden ####
     else if (var == "Rent Burden"){
       selected_df <- geo_year_df %>%
         
@@ -718,7 +674,7 @@ server <- function(input, output, session) {
                   moe = sum(moe)) 
       
     }
-    #### straight pipe hh ####
+    ### straight pipe hh ####
     else if (straight_pipe_hh()){
       selected_df <- geo_year_df %>%
         filter(hh_size %in% size_reactive(),
@@ -726,7 +682,7 @@ server <- function(input, output, session) {
         group_by(GEOID) %>%
         summarize(value = sum(value))
     } 
-    #### Household Size ####
+    ### Household Size ####
     else if (var == "Household Size") {
       selected_df <- geo_year_df %>%
         filter(short_label %in% size_reactive() & 
@@ -736,7 +692,7 @@ server <- function(input, output, session) {
                   value = sum(value),
                   moe = sum(moe))
     }
-    #### Number of Bedrooms ####
+    ### Number of Bedrooms ####
     else if (var == "Number of Bedrooms") {
       selected_df <- geo_year_df %>%
         filter(short_label %in% bedrooms_reactive() & 
@@ -746,7 +702,7 @@ server <- function(input, output, session) {
                   value = sum(value),
                   moe = sum(moe))
     }
-    #### Transportation & Age ####
+    ### Transportation & Age ####
     #Need to Add Race to csv in order to filter by it
     #maybe add median age too or just establish another pipeline for an age-specific csv
     else if (var == "Methods of Transportation to Work"){
@@ -756,13 +712,13 @@ server <- function(input, output, session) {
       # summarize(value = sum(value),
       #           moe = sum(moe))
     }
-    #### Median Income ####
+    ### Median Income ####
     else if (var == "Median Income"){
       selected_df <- geo_year_df %>%
         filter(short_label %in% income_reactive()) %>% 
         group_by(GEOID) 
     }
-    #### Median Gross Rent ####
+    ### Median Gross Rent ####
     else if (var == "Median Gross Rent"){
       selected_df <- geo_year_df %>%
         filter(short_label %in% median_rent_reactive()) %>% 
@@ -770,7 +726,7 @@ server <- function(input, output, session) {
       # summarize(value = sum(value),
       #           moe = sum(moe))
     }
-    #### Occupants per Room ####
+    ### Occupants per Room ####
     else if (var == "Number of Occupants per Room") {
       selected_df <- geo_year_df %>%
         filter(short_label %in% occupants_reactive() & 
@@ -790,37 +746,32 @@ server <- function(input, output, session) {
                   moe = sum(moe))
       
     }
-    #### Craigslist ####
+    ### Craigslist ####
     else if (var == "SORL Craigslist Rents"){
       selected_df <- geo_year_df %>%
         filter(short_label == craigslist_bedroom_reactive())  
     }
-    #### EHD ####
+    ### EHD ####
     else if (var == "EHD"){
       selected_df <- geo_year_df 
-      # %>%
-      #   filter(short_label %in% env_h_reactive()) %>% 
-      #   group_by(GEOID)
+      
     }
     
     selected_df
   })
   
-  
-  
-  # 
-  
+  # measure_df reactive ####
   
   measure_df_reactive <- reactive({
     selected_df <- selected_df_reactive()
     
     measure <- measure_reactive()
-    ### Measures ####
+    ### Straight Pipe ####
     if(!straight_pipe_hh()) {
       ## Measures for HH Size Smoothed 
       # I think this means we need Prevalence to be default
       # measure for HH size smoothed? 
-      
+      ### Value ####  
       if (measure == "Value") {
         measure_df <- selected_df %>%
           mutate(
@@ -829,6 +780,7 @@ server <- function(input, output, session) {
           ) %>%
           ungroup() 
       } 
+      ### Count ####
       else if (measure == "Count") {
         measure_df <- selected_df %>%
           ungroup() %>% 
@@ -840,7 +792,7 @@ server <- function(input, output, session) {
           ) %>%
           ungroup() 
       }
-      
+      ### Prevelence ####
       else if (measure == "Prevalence") {
         measure_df <- selected_df %>%
           group_by(GEOID) %>%
@@ -852,6 +804,7 @@ server <- function(input, output, session) {
           ) %>%
           ungroup() 
       }
+      ### Distribution ####
       else if (measure  == "Distribution"){
         measure_df <- selected_df %>%
           mutate(
@@ -861,7 +814,9 @@ server <- function(input, output, session) {
             SE = round(moe/qnorm(.95) * 10^4) / 10^2
           ) %>%
           ungroup()
-      }else if (measure  == "Binary"){
+      }
+      ### Binary ####
+      else if (measure  == "Binary"){
         measure_df <- selected_df %>%
           mutate(
             value = round(value, 1),
@@ -872,7 +827,7 @@ server <- function(input, output, session) {
     } 
     measure_df
   })
-  ## sp_reactive ####
+  # sp_reactive ####
   # generate an sp object with population data 
   # # and related geographic data based on user input
   sp_reactive <- reactive({
@@ -911,7 +866,7 @@ server <- function(input, output, session) {
     }
   })
   
-  ## legend_title_reactive() ####
+  #legend_title_reactive() ####
   #ARA_ Added branch for creating legend for other variables
   legend_title_reactive <- reactive({
     var <- input$var
@@ -949,7 +904,7 @@ server <- function(input, output, session) {
     }
   })
   
-  ## Popup/Rollover Text ####
+  #popup_text_reactive ####
   popup_text_reactive <- reactive({
     var <- input$var
     geo_logical <- input$geo_level # == "Census Tract"
@@ -984,21 +939,21 @@ server <- function(input, output, session) {
         measure_prefix <-  "EHD Percentile: "
       }
     }
+    
+    uncertainty <- "SE: <strong>%g</strong>"
+    
+    if(straight_pipe_hh()){
+      uncertainty <- "(<strong>%g</strong>, <strong>%g</strong>)"
+    } 
+    
+    paste0(geo_prefix,
+           "<strong>%s</strong><br/>", # GEOID
+           measure_prefix,
+           "<strong>%g</strong><br/>", # value
+           uncertainty)
+  })
   
-  uncertainty <- "SE: <strong>%g</strong>"
-  
-  if(straight_pipe_hh()){
-    uncertainty <- "(<strong>%g</strong>, <strong>%g</strong>)"
-  } 
-  
-  paste0(geo_prefix,
-         "<strong>%s</strong><br/>", # GEOID
-         measure_prefix,
-         "<strong>%g</strong><br/>", # value
-         uncertainty)
-})
-  
-  ## unique_quantile_length_reactive ####
+  # unique_quantile_length_reactive ####
   
   unique_quant_length_reactive <- reactive({
     sp <- sp_reactive()
@@ -1010,7 +965,7 @@ server <- function(input, output, session) {
                            na.rm = TRUE)))
   })
   
-  ## legend_values_reactive ####
+  # legend_values_reactive ####
   
   # calculate the values displayed in the legend
   legend_values_reactive <- reactive({
@@ -1082,6 +1037,28 @@ server <- function(input, output, session) {
   output$age_warning <- renderText({
     age_warning_reactive()
   })
+  
+  ## Load map layers ####
+  ### KC public clinics ####
+  if (!file.exists("./data/kc_public_clinics.shp")) {
+    download_kc_public_clinics()
+    while (!file.exists("./data/kc_public_clinics.shp")) {
+      Sys.sleep(1)
+    }
+  }
+  ### KC school sites ####
+  if (!file.exists("./data/kc_schools.shp")) {
+    download_kc_schools()
+    while (!file.exists("./data/kc_schools.shp")) {
+      Sys.sleep(1)
+    }
+  }
+  
+  ### KC transit lines 2040 ####  
+  kc_tl_2040 <- read_sf("./data/kc_tl_2040.shp")
+  while (!exists("kc_tl_2040")) {
+    Sys.sleep(1)
+  }
   
   # render the initial basemap and the public facility layers
   ## Base Layers & Map ####
@@ -2114,5 +2091,5 @@ server <- function(input, output, session) {
   # preload the visualization once the website is opened
   outputOptions(output, "map", suspendWhenHidden = FALSE)
   # outputOptions(output, "plot", suspendWhenHidden = FALSE)
-  }
+}
 

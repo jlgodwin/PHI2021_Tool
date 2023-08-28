@@ -13,12 +13,12 @@ message("Read tract data.shp.\n")
 # 
 # kc_tract_spdf_10 <- read_sf(dsn="./data/", layer= "kc_tract")
 # 
-
-#  message("Read hra data.shp.\n")
-#kc_hra_spdf_20 <- read_sf(dsn= "./data/hra_2020/hra_2020_nowater.shp")
+# 
+# #  message("Read hra data.shp.\n")
+# kc_hra_spdf_20 <- read_sf(dsn= "./data/hra_2020/hra_2020_nowater.shp")
 # kc_hra_spdf_20 <- kc_hra_spdf_20 %>%
 #   rename("GEOID" = "name")
-# st_crs(kc_hra_spdf_20) <- st_crs(kc_tract_spdf_10)
+# kc_hra_spdf_20 <- st_transform(kc_hra_spdf_20, crs = st_crs(kc_tract_spdf_10))
 # 
 # kc_hra_spdf_10 <- read_sf(dsn = "./data/", layer="kc_hra")
 # 
@@ -231,7 +231,7 @@ craigslist_hra <- craigslist_hra %>%
 craigslist_hra[is.na(craigslist_hra)] = 0
 craigslist_hra$moe <- craigslist_hra$sd/sqrt(craigslist_hra$n)
 
-###EHD Data ---------------------------------------------------------
+###Environmental Health Disparities Data ---------------------------------------------------------
 env_h_disparities <- read_sf(dsn= "./data/n_context_data/env_h_disparities.shp")
 env_h_disparities <- env_h_disparities %>% 
   st_drop_geometry() %>% 
@@ -274,7 +274,7 @@ server <- function(input, output, session) {
     if(input$var %in% c("Median Income", "Methods of Transportation to Work",
                         "Median Gross Rent", "SORL Craigslist Rents")){
       input$measure_type_cont
-    }else if(input$var %in% c("EHD")){
+    }else if(input$var %in% c("Environmental Health Disparities")){
       input$measure_type_binary
     }else{
       input$measure_type_cat
@@ -317,7 +317,7 @@ server <- function(input, output, session) {
       year <- as.numeric(strsplit(input$year_methods_of_t, "-")[[1]][2])
     }else if(input$var == "SORL Craigslist Rents"){
       year <- as.numeric(strsplit(input$year_craigslist, "-")[[1]][1])
-    }else if(input$var == "EHD"){
+    }else if(input$var == "Environmental Health Disparities"){
       year <- 2023
     }
     year
@@ -582,8 +582,8 @@ server <- function(input, output, session) {
         geo_df <- craigslist_hra
       }
     }
-    ## EHD ####
-    else if (var == "EHD"){
+    ## Environmental Health Disparities ####
+    else if (var == "Environmental Health Disparities"){
       if(geo){
         geo_df <- env_h_disparities
       }else{
@@ -751,8 +751,8 @@ server <- function(input, output, session) {
       selected_df <- geo_year_df %>%
         filter(short_label == craigslist_bedroom_reactive())  
     }
-    ### EHD ####
-    else if (var == "EHD"){
+    ### Environmental Health Disparities ####
+    else if (var == "Environmental Health Disparities"){
       selected_df <- geo_year_df 
       
     }
@@ -898,8 +898,8 @@ server <- function(input, output, session) {
         "Median Rent (Dollars)"
       }
     }else if (measure == "Binary"){
-      if(var == "EHD"){
-        "EHD Percentile"
+      if(var == "Environmental Health Disparities"){
+        "Environmental Health Disparities Percentile"
       }
     }
   })
@@ -935,8 +935,8 @@ server <- function(input, output, session) {
         measure_prefix <-   "Median Rent: $"
       }
     }else if (measure == "Binary"){
-      if(var == "EHD"){
-        measure_prefix <-  "EHD Percentile: "
+      if(var == "Environmental Health Disparities"){
+        measure_prefix <-  "Percentile: "
       }
     }
     

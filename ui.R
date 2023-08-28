@@ -271,7 +271,7 @@ ui <- dashboardPage(
                                 "Methods of Transportation to Work",
                                 "Median Gross Rent", "Number of Bedrooms",
                                 "Number of Occupants per Room", "SORL Craigslist Rents",
-                                "EHD"),
+                                "Environmental Health Disparities"),
                     selected = "Population"
                   )
                 ),
@@ -282,7 +282,7 @@ ui <- dashboardPage(
                                      , "& input.var != 'Methods of Transportation to Work'",
                                      "& input.var != 'Number of Occupants per Room'",
                                      "& input.var != 'Number of Bedrooms'",
-                                     "& input.var != 'EHD'"
+                                     "& input.var != 'Environmental Health Disparities'"
                   ),
                   box(
                     width = NULL,
@@ -299,7 +299,7 @@ ui <- dashboardPage(
                                      , "| input.var == 'Methods of Transportation to Work'",
                                      "| input.var == 'Number of Occupants per Room'",
                                      "| input.var == 'Number of Bedrooms'",
-                                     "| input.var == 'EHD'"
+                                     "| input.var == 'Environmental Health Disparities'"
                   ),
                   box(
                     width = NULL,
@@ -319,7 +319,7 @@ ui <- dashboardPage(
                                      , "& input.var != 'Median Gross Rent'"
                                      , "& input.var != 'Median Income'",
                                      "& input.var != 'SORL Craigslist Rents'",
-                                     "& input.var != 'EHD'"
+                                     "& input.var != 'Environmental Health Disparities'"
                                      ),
                   box(
                     width = NULL,
@@ -348,7 +348,7 @@ ui <- dashboardPage(
                   )
                 ),
                 conditionalPanel(
-                  condition = "input.var == 'EHD'",
+                  condition = "input.var == 'Environmental Health Disparities'",
                   box(
                     width = NULL,
                     selectInput(
@@ -517,7 +517,7 @@ ui <- dashboardPage(
                   
                 ),
                 conditionalPanel(
-                  condition = "input.var == 'EHD'",
+                  condition = "input.var == 'Environmental Health Disparities'",
                   box(
                     width = NULL,
                     
@@ -733,16 +733,16 @@ ui <- dashboardPage(
                    )
                  )
                ),
-               ### EHD ####
+               ### Environmental Health Disparities ####
                conditionalPanel(
-                 condition = "input.var == 'EHD'",
+                 condition = "input.var == 'Environmental Health Disparities'",
                  box(
                    width = NULL,
                    selectInput(
                      inputId = "env_h_dis",
-                     label = "EHD",
-                     choices = c("EHD"),
-                     selected = "EHD"
+                     label = "Environmental Health Disparities",
+                     choices = c("Environmental Health Disparities"),
+                     selected = "Environmental Health Disparities"
                      
                    )
                  )
